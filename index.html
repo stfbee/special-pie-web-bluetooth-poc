@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101c20">
+<title>Special Pie · BLE PoC</title>
+<link rel="stylesheet" href="style.css">
+<main>
+  <header><span class="eyebrow">WEB BLUETOOTH / ANDROID</span><h1>Special Pie <span>PoC</span></h1><p>Живые события стрелкового таймера M1A2</p></header>
+  <section><div id="connection" role="status">Не подключён</div><p id="support"></p><div class="actions"><button id="connect">Подключить таймер</button><button id="disconnect" disabled>Отключить</button><button id="demo" class="secondary">Демо</button></div><label><input type="checkbox" id="all"> Показать все BLE-устройства, если таймер не найден</label></section>
+  <section class="readout"><div id="session">Ожидание событий</div><div class="time"><span id="time">0.00</span><small>с</small></div><div class="stats"><span>Выстрелов <strong id="count">0</strong></span><span>Сплит <strong id="split">—</strong></span></div><p>Запускайте и останавливайте сессию кнопками на таймере.</p></section>
+  <section><h2>Выстрелы</h2><p>Номер показан с 1; пропуски пакетов не интерполируются.</p><table><thead><tr><th>№</th><th>Время, с</th><th>Сплит, с</th></tr></thead><tbody id="shots"></tbody></table></section>
+  <section><div class="actions"><h2>Диагностика</h2><button id="export" class="secondary">Скачать JSON</button></div><p>Журнал хранится в памяти этой вкладки. Перед закрытием скачайте его.</p><pre id="log" aria-label="Журнал BLE"></pre></section>
+  <footer>FFF0 → FFF1 Notify · точность 10 мс · keep screen on<br>Держите вкладку открытой и экран включённым во время проверки.</footer>
+</main>
+<script type="module">
+  import('./app.mjs?v=3').catch(error => {
+    document.getElementById('support').textContent = 'Ошибка загрузки приложения: ' + error.message;
+    document.getElementById('connection').textContent = 'JavaScript не загрузился. Обновите страницу.';
+  });
+</script>
+</html>
